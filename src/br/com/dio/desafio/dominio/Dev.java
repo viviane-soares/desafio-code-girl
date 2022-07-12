@@ -4,18 +4,24 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-
 public class Dev {
     private String nome;
+    private int id;
+
+
     //linkedHashSet e para imprimir na ordem em que for feito os cursos pelo Dev
     // o set conteudo faz com que conseguimos acesso as classes cursos e mentorias que contem na classe conteudos
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
 
+    public Dev() {
+
+     }
     public void inscreverBootcamp(Bootcamp bootcamp){
-//addAll ele pega tudo que tem dentro do bootcamp.getConteudo e coloca dentro de conteudos Incritos//
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         bootcamp.getDevsInscritos().add(this);
+        /*addAll ele pega tudo que tem dentro do bootcamp.getConteudo e coloca dentro de conteudos Incritos*/
+
     }
 
     public void progredir() {
@@ -28,7 +34,6 @@ public class Dev {
             System.err.println(" Você não esta matriculado em nenhum conteudo!!");
         }
     }
-
     public double calcularTotalXp(){
         return this.conteudosConcluidos
                 .stream()
@@ -41,7 +46,15 @@ public class Dev {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = "Nome: ";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Set<Conteudo> getConteudosInscritos() {
@@ -65,11 +78,17 @@ public class Dev {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dev dev = (Dev) o;
-        return Objects.equals(nome, dev.nome) && Objects.equals(conteudosInscritos, dev.conteudosInscritos) && Objects.equals(conteudosConcluidos, dev.conteudosConcluidos);
+        return Objects.equals(nome, dev.nome)
+                && Objects.equals(conteudosInscritos, dev.conteudosInscritos)
+                && Objects.equals(conteudosConcluidos, dev.conteudosConcluidos);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
+
+
     }
+
+
 }
